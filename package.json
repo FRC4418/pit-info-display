@@ -1,0 +1,28 @@
+{
+  "name": "pit-info-display",
+  "version": "1.0.0",
+  "description": "NEW pit info display for team 4418 (feel free to copy and re-use)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FRC4418/pit-info-display.git"
+  },
+  "keywords": [
+    "frc",
+    "4418",
+    "robotics"
+  ],
+  "author": "Shaun Keys",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FRC4418/pit-info-display/issues"
+  },
+  "homepage": "https://github.com/FRC4418/pit-info-display#readme",
+  "dependencies": {
+    "electron": "^1.7.11",
+    "thebluealliance": "^1.2.3"
+  }
+}
