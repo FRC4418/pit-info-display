@@ -1,0 +1,93 @@
+//Colors http://material.io/color/
+$primary-base: #2962ff;
+$primary-base-text: white;
+$primary-light: #768fff;
+$primary-light-text: black;
+$primary-dark: #0039cb;
+$primary-dark-text: white;
+
+$secondary-base: #fdd835;
+$secondary-base-text: black;
+$secondary-light: #ffff6b;
+$secondary-light-text: black;
+$secondary-dark: #c6a700;
+$secondary-dark-text: black;
+
+//Start normal styling
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	width: 100%;
+	min-height: 100%;
+	body {
+		width: 100%;
+		min-height: 100%;
+		display: flex;
+		flex-flow: row nowrap;
+	}
+}
+
+div.sidebar {
+	width: 20em;
+	height: 100%;
+	background-color: $primary-base;
+	color: $primary-base-text;
+	display: flex;
+	flex-flow: column nowrap;
+	user-select: none;
+	cursor: default;
+	div.item {
+		display: flex;
+		//justify-content: center;
+		text-indent: 1em;
+		align-items: center;
+		height: 3em;
+		//background-color: $primary-base;
+		//color: $primary-base-text;
+		font-family: 'Roboto';
+		font-weight: 500;
+		font-size: 2em;
+		&:hover {
+			background-color: $primary-dark;
+			color: $primary-dark-text;
+		}
+	}
+}
+
+div.content {
+	width: 100%;
+	div.page {
+		//Do not show inactive pages
+		display: none;
+		&.active { //But show active ones
+			display: flex;
+		}
+		//Continue with general styling
+		//background-color: $secondary-light;
+		width: 100%;
+		min-height: 100%;
+		padding: 1em;
+	}
+}
+
+//Style individual pages
+div.page {
+	&#Home {
+		//background-color: $secondary-dark;
+		//color: $secondary-dark-text;
+		.branding {
+			background-color: $secondary-dark;
+			color: $secondary-dark-text;
+		}
+	}
+}
+
+//Define standard element styles
+h1 {
+	font-weight: 800;
+	display: block;
+}

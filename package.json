@@ -4,7 +4,8 @@
   "description": "NEW pit info display for team 4418 (feel free to copy and re-use)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rebuild-node-sass": "electron build-tools/complete.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
   "homepage": "https://github.com/FRC4418/pit-info-display#readme",
   "dependencies": {
     "electron": "^1.7.11",
+    "node-abi": "^2.2.0",
+    "node-sass": "^4.7.2",
     "thebluealliance": "^1.2.3"
   }
 }
