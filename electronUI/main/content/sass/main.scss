@@ -17,6 +17,7 @@ $secondary-dark-text: black;
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
 html {
@@ -31,24 +32,62 @@ html {
 }
 
 div.sidebar {
-	width: 15em;
+	width: 20em;
 	height: 100%;
 	background-color: $primary-base;
+	color: $primary-base-text;
 	display: flex;
 	flex-flow: column nowrap;
+	user-select: none;
+	cursor: default;
 	div.item {
 		display: flex;
 		//justify-content: center;
 		text-indent: 1em;
 		align-items: center;
 		height: 3em;
-		background-color: $primary-base;
-		color: $primary-dark-text;
-		font-family: 'Roboto Thin';
+		//background-color: $primary-base;
+		//color: $primary-base-text;
+		font-family: 'Roboto';
+		font-weight: 500;
 		font-size: 2em;
 		&:hover {
 			background-color: $primary-dark;
 			color: $primary-dark-text;
 		}
 	}
+}
+
+div.content {
+	width: 100%;
+	div.page {
+		//Do not show inactive pages
+		display: none;
+		&.active { //But show active ones
+			display: flex;
+		}
+		//Continue with general styling
+		//background-color: $secondary-light;
+		width: 100%;
+		min-height: 100%;
+		padding: 1em;
+	}
+}
+
+//Style individual pages
+div.page {
+	&#Home {
+		//background-color: $secondary-dark;
+		//color: $secondary-dark-text;
+		.branding {
+			background-color: $secondary-dark;
+			color: $secondary-dark-text;
+		}
+	}
+}
+
+//Define standard element styles
+h1 {
+	font-weight: 800;
+	display: block;
 }

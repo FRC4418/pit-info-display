@@ -1,6 +1,7 @@
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  box-sizing: border-box; }
 
 html {
   width: 100%;
@@ -12,22 +13,42 @@ html {
     flex-flow: row nowrap; }
 
 div.sidebar {
-  width: 15em;
+  width: 20em;
   height: 100%;
   background-color: #2962ff;
+  color: white;
   display: flex;
-  flex-flow: column nowrap; }
+  flex-flow: column nowrap;
+  user-select: none;
+  cursor: default; }
   div.sidebar div.item {
     display: flex;
     text-indent: 1em;
     align-items: center;
     height: 3em;
-    background-color: #2962ff;
-    color: white;
-    font-family: 'Roboto Thin';
+    font-family: 'Roboto';
+    font-weight: 500;
     font-size: 2em; }
     div.sidebar div.item:hover {
       background-color: #0039cb;
       color: white; }
+
+div.content {
+  width: 100%; }
+  div.content div.page {
+    display: none;
+    width: 100%;
+    min-height: 100%;
+    padding: 1em; }
+    div.content div.page.active {
+      display: flex; }
+
+div.page#Home .branding {
+  background-color: #c6a700;
+  color: black; }
+
+h1 {
+  font-weight: 800;
+  display: block; }
 
 /*# sourceMappingURL=main.css.map */
