@@ -15,12 +15,21 @@ if(autoCompile) {
 	})();
 }
 
-window.onload = function() {
-	([
-		"js/header.js"
-	]).forEach(function(scriptSrc) {
-		var script = document.createElement("script");
-		script.src = scriptSrc;
-		document.head.appendChild(script);
-	});
+var scriptsToLoad = [ //This list is in order (scripts loaded synchronously (NOT RUN SYNCHRONOUSLY))
+	"js/setupEnv.js",
+	"js/header.js",
+	"js/showWindow.js"
+];
+
+scriptsToLoad.reverse();
+
+function loadScripts() {
+	var script = document.createElement("script");
+	script.src = scriptsToLoad.pop();
+	script.onload = function() {
+		if(scriptsToLoad.length > 0) loadScripts();
+	};
+	document.head.appendChild(script);
 }
+
+window.onload = loadScripts;
