@@ -1,0 +1,54 @@
+//Colors http://material.io/color/
+$primary-base: #2962ff;
+$primary-base-text: white;
+$primary-light: #768fff;
+$primary-light-text: black;
+$primary-dark: #0039cb;
+$primary-dark-text: white;
+
+$secondary-base: #fdd835;
+$secondary-base-text: black;
+$secondary-light: #ffff6b;
+$secondary-light-text: black;
+$secondary-dark: #c6a700;
+$secondary-dark-text: black;
+
+//Start normal styling
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	width: 100%;
+	min-height: 100%;
+	body {
+		width: 100%;
+		min-height: 100%;
+		display: flex;
+		flex-flow: row nowrap;
+	}
+}
+
+div.sidebar {
+	width: 15em;
+	height: 100%;
+	background-color: $primary-base;
+	display: flex;
+	flex-flow: column nowrap;
+	div.item {
+		display: flex;
+		//justify-content: center;
+		text-indent: 1em;
+		align-items: center;
+		height: 3em;
+		background-color: $primary-base;
+		color: $primary-dark-text;
+		font-family: 'Roboto Thin';
+		font-size: 2em;
+		&:hover {
+			background-color: $primary-dark;
+			color: $primary-dark-text;
+		}
+	}
+}
