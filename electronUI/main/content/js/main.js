@@ -1,5 +1,5 @@
 // Render SASS files
-// (makes it easier for people who don't know how to compile them)
+// (makes it easier for people who don't know how or care to compile them)
 var autoCompile = true;
 if(autoCompile) {
 	(function() {
@@ -16,8 +16,10 @@ if(autoCompile) {
 }
 
 var scriptsToLoad = [ //This list is in order (scripts loaded synchronously (NOT RUN SYNCHRONOUSLY))
+	"https://cdn.jsdelivr.net/npm/vue",
 	"js/setupEnv.js",
 	"js/header.js",
+	"js/contentControl/nextMatch.js",
 	"js/showWindow.js"
 ];
 
