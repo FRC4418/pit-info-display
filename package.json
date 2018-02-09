@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/FRC4418/pit-info-display#readme",
   "dependencies": {
+    "bluealliance": "^0.8.9",
     "electron": "^1.7.11",
     "node-abi": "^2.2.0",
-    "node-sass": "^4.7.2",
-    "thebluealliance": "^1.2.3"
+    "node-sass": "^4.7.2"
   }
 }
