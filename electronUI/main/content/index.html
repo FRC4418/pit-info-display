@@ -6,15 +6,50 @@
 	</head>
 	<body>
 		<div class="sidebar">
-			<div class="item active" for="Home">Home</div>
-			<div class="item" for="NextMatch">Next Match</div>
+			<div class="item" for="Home">Home</div>
+			<div class="item active" for="NextMatch">Next Match</div>
 		</div>
 		<div class="content">
-			<div class="page active" id="Home">
-				Testing. This is page content.
+			<div class="page" id="Home">
+
 			</div>
-			<div class="page" id="NextMatch">
-				Hello World
+			<div class="page active" id="NextMatch">
+				<div class="top">
+					<div class="time">
+						{{ currentTime }}
+					</div>
+					<div class="matchTime"> <!--Top Right Match Times Blocks-->
+						<div class="times">
+							<div class="countdown">
+								{{ timeUntil }}
+							</div>
+							<div class="estimatedTime">
+								{{ time }}
+							</div>
+						</div>
+						<div class="label">
+							Next Match
+						</div>
+					</div>
+				</div>
+				<div class="bottom">
+					<div class="lineup">
+						<div class="red">
+							<div class="team" v-for="team in lineup[0]" v-if="team.enabled">
+								<div class="number">{{ team.number }}</div>
+								<div class="name">{{ team.name }}</div>
+								<div class="rank">{{ team.rank }}</div>
+							</div>
+						</div>
+						<div class="blue">
+							<div class="team" v-for="team in lineup[1]" v-if="team.enabled">
+								<div class="number">{{ team.number }}</div>
+								<div class="name">{{ team.name }}</div>
+								<div class="rank">{{ team.rank }}</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
