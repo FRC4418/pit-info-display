@@ -8,28 +8,40 @@
 		<div class="sidebar">
 			<div class="item" for="Home">Home</div>
 			<div class="item active" for="NextMatch">Next Match</div>
+			<div class="item" for="TeamStats">Stats</div>
 		</div>
 		<div class="content">
-			<div class="page" id="Home">
+			<div class="page hidden" id="Home">
 
 			</div>
+			<!--NOTE: END HOMEPAGE-->
 			<div class="page active" id="NextMatch">
 				<div class="bg"></div>
 				<div class="top">
 					<div class="time">
-						{{ currentTime }}
+						<div class="data">
+							<div>{{ currentTime }}</div>
+							<div>{{ ampm }}</div>
+						</div>
+						<div class="label">Current Time</div>
 					</div>
 					<div class="matchTime"> <!--Top Right Match Times Blocks-->
 						<div class="times">
+							<div class="timeLabel">
+								Time remaining
+							</div>
 							<div class="countdown">
 								{{ timeUntil }}
+							</div>
+							<div class="timeLabel">
+								Match Time
 							</div>
 							<div class="estimatedTime">
 								{{ time }}
 							</div>
 						</div>
 						<div class="label">
-							Next Match
+							Our Next Match
 						</div>
 					</div>
 				</div>
@@ -50,7 +62,14 @@
 							</div>
 						</div>
 					</div>
+					<div class="logo">
+
+					</div>
 				</div>
+			</div>
+			<!--NOTE: END TEAM STATS-->
+			<div class="page hidden" id="TeamStats">
+
 			</div>
 		</div>
 	</body>
