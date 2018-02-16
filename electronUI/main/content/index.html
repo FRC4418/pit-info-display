@@ -48,23 +48,21 @@
 				<div class="bottom">
 					<div class="lineup">
 						<div class="red">
-							<div class="team" v-for="team in lineup[0]" v-if="team.enabled">
+							<div class="team" v-for="team in lineup[0]">
 								<div class="number">{{ team.number }}</div>
 								<div class="name">{{ team.name }}</div>
 								<div class="rank">{{ team.rank }}</div>
 							</div>
 						</div>
 						<div class="blue">
-							<div class="team" v-for="team in lineup[1]" v-if="team.enabled">
+							<div class="team" v-for="team in lineup[1]">
 								<div class="number">{{ team.number }}</div>
 								<div class="name">{{ team.name }}</div>
 								<div class="rank">{{ team.rank }}</div>
 							</div>
 						</div>
 					</div>
-					<div class="logo">
-
-					</div>
+					<div class="logo"></div>
 				</div>
 			</div>
 			<!--NOTE: END TEAM STATS-->

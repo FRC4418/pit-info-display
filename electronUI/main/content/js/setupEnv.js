@@ -9,7 +9,6 @@ class Team {
 		this.number = 0;
 		this.name = "LOADING...";
 		this.rank = 0;
-		this.enabled = true;
 		let self = this;
 		tba.getTeam(teamNumber).then((team) => {//Get team data
 			self.number = teamNumber;
