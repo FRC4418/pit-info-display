@@ -128,7 +128,7 @@ var nextMatch = new Vue({
 
 			var displaySeconds = true;
 			var formattedCountdown = (displaySeconds) ? (
-				`${(hours*60)+minutes}:${seconds}`
+				`${(hours*60)+minutes}:${(seconds<10)?("0"+seconds):(seconds)}`
 			) : (
 				`${(hours*60)+minutes} min`
 			);
