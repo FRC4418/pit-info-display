@@ -19,11 +19,12 @@ var platform = process.platform;
 var electronVersion = process.versions.electron;
 var vendor = `vendor/${platform}-${arch}-${abi.getAbi(electronVersion,"electron")}`
 
+//Change directory to node-sass module folder
+process.chdir(`${__dirname}/../node_modules/node-sass`);
+
 //Check if we even need to build
 if(fs.existsSync(vendor+"/binding.node")) process.exit();
 
-//Change directory to node-sass module folder
-process.chdir(`${__dirname}/../node_modules/node-sass`);
 //Rebuild node-sass with node-gyp
 var gyp = spawn("node-gyp",["rebuild",`--target=${electronVersion}`,`--arch=${arch}`,"--dist-url=https://atom.io/download/electron"],{cwd: process.cwd()});
 //Attach node-gyp to console so you don't have a heart attack when your computer's
