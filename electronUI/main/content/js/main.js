@@ -1,27 +1,9 @@
-// Render SASS files
-// (makes it easier for people who don't know how or care to compile them)
-(function() {
-	var autoCompile = true;
-	if(autoCompile) {
-		(function() {
-			var sass = require("node-sass");
-			sass.render({
-				file: `${process.cwd()}/electronUI/main/content/sass/main.scss`
-			},function(err,res) {
-				//console.log(err,String(res.css));
-				var css = document.createElement("style");
-				css.textContent = String(res.css);
-				document.head.appendChild(css);
-			});
-		})();
-	}
-})();
-
 // Load everything else
 (function() {
 	var scriptsToLoad = [ //This list is in order (scripts loaded synchronously (NOT RUN SYNCHRONOUSLY))
 		"https://cdn.jsdelivr.net/npm/vue",		//Vue library
 		"js/setupEnv.js",						//Set up envoronment (mostly electron stuff)
+		"js/loadSass.js",						//Render SCSS files
 		"js/sidebar.js",						//Set up the sidebar to switch pages
 		"js/contentControl/home.js",			//Set up home page (shows your team's website)
 		"js/contentControl/nextMatch.js",		//Set up the vue controller for #NextMatch
