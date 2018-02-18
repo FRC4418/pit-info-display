@@ -20,10 +20,19 @@ class Team {
 	}
 }
 
+var compLevels = ["qm","ef","qf","sf","f"];
 tba.getMatchesForTeam = function(team,eventKey) {
 	return new Promise(function(resolve) {
 		tba.callTBA(`/team/frc${team}/event/${eventKey}/matches`).then(function(data) {
-			resolve(data);
+			resolve(
+				data.sort(function(a,b) {
+					if(a.comp_level!=b.comp_level) {
+						return compLevels.indexOf(a.comp_level) - compLevels.indexOf(b.comp_level);
+					} else {
+						return a.match_number - b.match_number;
+					}
+				})
+			);
 		});
 	});
 }
