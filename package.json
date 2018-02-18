@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "rebuild-node-sass": "electron build-tools/complete.js"
+    "postinstall": "electron build-tools/complete.js"
   },
   "repository": {
     "type": "git",
