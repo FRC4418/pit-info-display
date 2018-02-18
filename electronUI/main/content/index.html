@@ -12,7 +12,7 @@
 		</div>
 		<div class="content">
 			<div class="page hidden" id="Home">
-
+				<webview v-bind:src="teamPageURL" frameborder="0"></webview>
 			</div>
 			<!--NOTE: END HOMEPAGE-->
 			<div class="page active" id="NextMatch">
@@ -67,7 +67,17 @@
 			</div>
 			<!--NOTE: END Next Match Stats-->
 			<div class="page hidden" id="TeamStats">
-
+				<table class="stats">
+					<!-- NOTE: <th> is table header -->
+					<tr> <!-- NOTE: This is the top header -->
+						<th></th>
+						<th v-for="(match,index) in matches">{{ index+1 }}</th>
+					</tr>
+					<tr>
+						<th></th>
+						<td></td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</body>

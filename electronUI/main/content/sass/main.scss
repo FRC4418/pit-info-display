@@ -46,7 +46,8 @@ $secondary-dark-text: white;
 
 html {
 	width: 100%;
-	min-height: 100%;
+	height: 100%;
+	overflow: auto;
 	body {
 		width: 100%;
 		min-height: 100%;
@@ -97,10 +98,12 @@ div.content {
 //Style individual pages
 div.page {
 	&#Home {
-		//padding: 0;
-		.branding {
-			background-color: $secondary-base;
-			color: $secondary-base-text;
+		padding: 0;
+		webview {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
 		}
 	}
 
@@ -218,6 +221,23 @@ div.page {
 				background-position: center center;
 				background-repeat: no-repeat;
 				flex-grow: 0.625;
+			}
+		}
+	}
+	&#TeamStats {
+		padding: 0;
+		table.stats {
+			border: 1px solid black;
+			table-layout: fixed;
+			width: 100%;
+			height: 100%;
+			//Enable borders
+			border-collapse: collapse;
+			td,th {
+				padding: 1em;
+				border: 1px solid black;
+				margin: 0;
+
 			}
 		}
 	}

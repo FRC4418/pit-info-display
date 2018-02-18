@@ -23,6 +23,7 @@
 		"https://cdn.jsdelivr.net/npm/vue",		//Vue library
 		"js/setupEnv.js",						//Set up envoronment (mostly electron stuff)
 		"js/sidebar.js",						//Set up the sidebar to switch pages
+		"js/contentControl/home.js",			//Set up home page (shows your team's website)
 		"js/contentControl/nextMatch.js",		//Set up the vue controller for #NextMatch
 		"js/contentControl/stats.js",			//Set up the vue controller for #TeamStats
 		"js/showWindow.js"						//Tell the main process we are done loading
