@@ -6,7 +6,7 @@
 * semantics, and therefore needs access to the electron environment so that it
 * knows how to do stuff so that it can work. It is NOT however, interactive, and
 * therefore simply logs to the console.
-* 
+*
 */
 //var electron = require("electron");
 var fs = require("fs");
@@ -18,6 +18,9 @@ var arch = process.arch;
 var platform = process.platform;
 var electronVersion = process.versions.electron;
 var vendor = `vendor/${platform}-${arch}-${abi.getAbi(electronVersion,"electron")}`
+
+//Check if we even need to build
+if(fs.existsSync(vendor+"/binding.node")) process.exit();
 
 //Change directory to node-sass module folder
 process.chdir(`${__dirname}/../node_modules/node-sass`);
