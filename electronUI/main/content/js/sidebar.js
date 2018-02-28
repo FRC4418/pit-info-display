@@ -12,6 +12,7 @@ document.querySelector(".sidebar").addEventListener("click",function(e) {
 		var newActive = document.querySelector(`#${e.target.getAttribute("for")}`);
 		newActive.classList.remove("hidden");
 		newActive.classList.add("active");
+		window.resizeBy(0,0);
 	}
 
 })

@@ -12,9 +12,6 @@
 			<div class="item" for="Browser">Browser</div>
 		</div>
 		<div class="content">
-			<div class="page hidden" id="Home">
-				<webview v-bind:src="teamPageURL" frameborder="0"></webview>
-			</div>
 			<!--NOTE: END HOMEPAGE-->
 			<div class="page active" id="NextMatch">
 				<div class="bg"></div>
@@ -80,7 +77,7 @@
 				</table>
 			</div>
 			<div class="page hidden" id="Browser">
-				<webview controls src="http://google.com"></webview>
+				<webview id="BrowserView" controls src="http://google.com"></webview>
 			</div>
 		</div>
 	</body>
