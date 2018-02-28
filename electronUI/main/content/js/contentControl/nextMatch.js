@@ -99,6 +99,15 @@ var nextMatch = new Vue({
 				});
 				requestAnimationFrame(updateMatchTime);
 				resolve();
+			}).catch(function(err) {
+				if(err=="Matches not available") {
+					nextMatch.lineup[0] = [];
+					nextMatch.lineup[1] = [];
+					nextMatch.time = "No more matches!";
+					console.log("No more matches");
+					setTimeout(populateNextMatch,30*1000); //Check again in 30 seconds (between QMs and finals)
+				}
+
 			});
 		});
 	}
