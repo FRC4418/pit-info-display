@@ -19,8 +19,12 @@
 			"secondary-dark-text": "white"
 		}
 	},
+	"custom": {
+		"statsToDisplay": [
+			""
+		]
+	},
 	"competitionInfo": {
-		"name": "Currently unused. May be used to auto-search later, but not recommended, and I'm not sure it will work",
 		"code": "code"
 	}
 }

@@ -11,44 +11,22 @@ class Team {
 		this.rank = 0;
 		let self = this;
 		tba.getTeam(teamNumber).then((team) => {//Get team data
+			//console.log("GetTeam");
 			self.number = teamNumber;
 			self.name = team.nickname;
-			tba.callTBA(`/team/frc${teamNumber}/event/${new Date().getFullYear()}${cfg.competitionInfo.code}`).then(function(teamMeta) {
-				self.rank = (!!teamMeta.Error) ? (0) : (teamMeta.qual.ranking.rank);
+			tba.getTeamAtEvent(teamNumber,cfg.competitionInfo.code).then(function(teamMeta) {
+				//console.log("AtEvent");
+				self.rank = (!teamMeta) ? ("?") : ((!!teamMeta.Error) ? ("Err") : (teamMeta.qual.ranking.rank));
 			});
 		});
 	}
 }
 
-var compLevels = ["qm","ef","qf","sf","f"];
-tba.getMatchesForTeam = function(team,eventKey) {
+tba.getNextMatchLegacy = tba.getNextMatch;
+tba.getNextMatch = function(team,eventCode) {
 	return new Promise(function(resolve) {
-		tba.callTBA(`/team/frc${team}/event/${eventKey}/matches`).then(function(data) {
-			resolve(
-				data.sort(function(a,b) {
-					if(a.comp_level!=b.comp_level) {
-						return compLevels.indexOf(a.comp_level) - compLevels.indexOf(b.comp_level);
-					} else {
-						return a.match_number - b.match_number;
-					}
-				})
-			);
-		});
-	});
-}
-
-//Get next match
-tba.getNextMatch = function(number,eventCode) {
-	return new Promise(function(resolve) {
-		try {
-			tba.getMatchesForTeam(number,`${new Date().getFullYear()}${eventCode}`).then(function(matches) {
-				//console.log(matches);
-				for (var i = 0; i < matches.length; i++) {
-					if(!!matches[i].actual_time) {
-						resolve(matches[i]);
-						return;
-					}
-				}
+		tba.getNextMatchLegacy(team,eventCode).then(resolve).catch(function(err) {
+			if(err=="Matches not available") {
 				resolve({ //DEBUG: match
 					predicted_time: Math.ceil(new Date((new Date()).getTime() + (10*60*1000)).getTime()/1000),
 					alliances: {
@@ -68,12 +46,7 @@ tba.getNextMatch = function(number,eventCode) {
 						}
 					}
 				});
-			}).catch(function(err) {
-				console.error(err);
-			});
-		} catch(e) {
-			console.error(e);
-			tba.getNextMatch(number,eventCode);
-		}
+			}
+		});
 	});
 }
