@@ -1,6 +1,7 @@
 // Render SASS files
 // (makes it easier for people who don't know how or care to compile them)
 (function() {
+	var path = require("path");
 	var autoCompile = true;
 	if(autoCompile) {
 		(function() {
@@ -26,6 +27,8 @@
 							$secondary-dark: ${cfg.teamInfo.colors["secondary-dark"]};
 							$secondary-dark-text: ${cfg.teamInfo.colors["secondary-dark-text"]};
 						`};
+					} else {
+						return {file: path.join(`${process.cwd()}/electronUI/main/content/sass/`,url)};
 					}
 				}
 			},function(err,res) {
