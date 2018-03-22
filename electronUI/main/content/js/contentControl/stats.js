@@ -6,5 +6,17 @@ var statsPage = new Vue({
 		matches: (function() {
 			tba.getMatchesForTeam(78,"week0").then((data) => statsPage.matches = data);
 		})(),
+	},
+	methods: {
+		watchVideo: function(match) {
+			switch(match.videos[0].type) {
+				case "youtube":
+					loadInBrowser("http://youtube.com/watch?v="+match.videos[0].key);
+					break;
+				case "vimeo":
+					loadInBrowser("http://vimeo.com/"+match.videos[0].key);
+					break;
+			}
+		}
 	}
 });

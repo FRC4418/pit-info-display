@@ -69,7 +69,7 @@
 					<!-- NOTE: <th> is table header -->
 					<tr> <!-- NOTE: This is the top header -->
 						<th></th>
-						<th v-for="match in matches"><a @click="window.open('http://youtube.com/watch?v='+match.videos[0].key)" href="#">{{ match.comp_level }}{{ match.match_number }}</a></th>
+						<th v-for="match in matches"><a @click="watchVideo(match)" href="#">{{ match.comp_level }}{{ match.match_number }}</a></th>
 					</tr>
 					<tr v-for="stat in stats">
 						<th></th>

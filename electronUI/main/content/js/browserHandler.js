@@ -1,7 +1,9 @@
 //Intercept window.open to use embedded browser
 var browserView = document.querySelector("#BrowserView");
 window.openLegacy = window.open;
-window.open = function(url) {
+window.open = loadInBrowser;
+
+function loadInBrowser(url) {
 	//Hide current page and mark it inactive
 	var oldActive = document.querySelector("div.item.active");
 	oldActive.classList.remove("active");
