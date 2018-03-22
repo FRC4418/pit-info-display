@@ -4,7 +4,7 @@ var statsPage = new Vue({
 		team: new Team(cfg.teamInfo.number),
 		stats: cfg.custom.statsToDisplay,
 		matches: (function() {
-			tba.getMatchesForTeam(78,"week0").then((data) => statsPage.matches = data);
+			tba.getMatchesForTeam(cfg.teamInfo.number,cfg.competitionInfo.code).then((data) => statsPage.matches = data);
 		})(),
 	},
 	methods: {
