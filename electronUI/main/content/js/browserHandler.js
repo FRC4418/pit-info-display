@@ -19,3 +19,15 @@ window.open = function(url) {
 }
 
 //Browser Controls
+
+//LiveStream
+tba.getEvent(cfg.competitionInfo.code).then((res) => {
+	if(res.webcasts.length>0) {
+		document.querySelector("#LiveStream iframe").src = (function() {
+			switch(res.webcasts[cfg.webcastIndex].type) {
+				case "twitch":
+					return "https://player.twitch.tv/?channel="+res.webcasts[cfg.webcastIndex].channel;
+			}
+		})();
+	}
+});
