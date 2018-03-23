@@ -27,7 +27,7 @@ var statsPage = new Vue({
 	}
 });
 
-function setStats(team,switchPage,code) {
+function setStats(team,switchPage,indicator,code) {
 	if(switchPage) {
 		document.querySelector("#TSButton").click();
 	}
@@ -36,12 +36,13 @@ function setStats(team,switchPage,code) {
 	statsPage.data = [
 		[
 			{
-				text: "",
+				text: team,
 				link: false,
-				color: "#FF9800"
+				styleTd: [indicator]
 			}
 		]
 	], //2-dimensional array indexed data[y][x]
+	console.log(statsPage.data);
 	//Get matches for default team
 	tba.getMatchesForTeam(team,(code) ? (code) : (cfg.competitionInfo.code)).then((data) => {
 
@@ -53,24 +54,39 @@ function setStats(team,switchPage,code) {
 				text: `${cfg.custom.statsToDisplay[i]}`,
 				link: false,
 				style: ["bold"],
-				color: "#3f51b5"
+				styleTd: ["blue"]
 			});
 			Vue.set(statsPage.data[((i+1)*2)],0,{
 				text: `${cfg.custom.statsToDisplay[i]}`,
 				link: false,
 				style: ["bold"],
-				color: "#d32f2f"
+				styleTd: ["red"]
 			});
 		}
 
-		var matches = data.filter(match => !!match.post_result_time);
+		var matches = data.filter(match => !!match.score_breakdown);
 		for (var i = 0; i < matches.length; i++) {
+
+			//Get the alliance that the selected team is on
+			var teamAlliance = (function() {
+				for (var k = 0; k < matches[i].alliances.blue.team_keys.length; k++) {
+					if(matches[i].alliances.blue.team_keys[k]==("frc"+team)) {
+						return "blue"
+					}
+				}
+				for (var k = 0; k < matches[i].alliances.red.team_keys.length; k++) {
+					if(matches[i].alliances.red.team_keys[k]==("frc"+team)) {
+						return "red"
+					}
+				}
+			})()
+
 			//Headers
 			Vue.set(statsPage.data[0],i+1/*Leave a space for labels*/,{
 				text: `${matches[i].comp_level}${matches[i].match_number}`.toUpperCase(),
 				link: true,
 				style: ["bold","text-black"],
-				color: "#FF9800",
+				styleTd: [teamAlliance],
 				videos: matches[i].videos
 			});
 
@@ -80,13 +96,15 @@ function setStats(team,switchPage,code) {
 					text: `${matches[i].score_breakdown.blue[cfg.custom.statsToDisplay[j]]}`,
 					link: false,
 					bold: false,
-					color: "#3f51b5"
+					styleTd: ["blue"],
+					style: [(teamAlliance=="blue") ? ("highlight") : (null)]
 				});
 				Vue.set(statsPage.data[((j+1)*2)],i+1,{
 					text: `${matches[i].score_breakdown.red[cfg.custom.statsToDisplay[j]]}`,
 					link: false,
 					bold: false,
-					color: "#d32f2f"
+					styleTd: ["red"],
+					style: [(teamAlliance=="red") ? ("highlight") : (null)]
 				});
 			}
 		}
@@ -96,4 +114,5 @@ function setStats(team,switchPage,code) {
 
 nextMatch.setStats = setStats;
 
-setStats(cfg.teamInfo.number);
+// setStats(78/*cfg.teamInfo.number*/,false,"blue","week0");
+setStats(cfg.teamInfo.number,false,"blue");

@@ -40,21 +40,21 @@
 							</div>
 						</div>
 						<div class="label">
-							Our Next Match
+							Our Next Match: {{ matchNumber }}
 						</div>
 					</div>
 				</div>
 				<div class="bottom">
 					<div class="lineup">
 						<div class="red">
-							<div class="team" v-for="team in lineup[0]" @click="setStats(team.number,true)">
+							<div class="team" v-for="team in lineup[0]" @click="setStats(team.number,true,'red')">
 								<div class="number">{{ team.number }}</div>
 								<div class="name">{{ team.name }}</div>
 								<div class="rank">{{ team.rank }}</div>
 							</div>
 						</div>
 						<div class="blue">
-							<div class="team" v-for="team in lineup[1]" @click="setStats(team.number,true)">
+							<div class="team" v-for="team in lineup[1]" @click="setStats(team.number,true,'blue')">
 								<div class="number">{{ team.number }}</div>
 								<div class="name">{{ team.name }}</div>
 								<div class="rank">{{ team.rank }}</div>
@@ -68,7 +68,7 @@
 			<div class="page hidden" id="TeamStats">
 				<table class="stats">
 					<tr v-for="stat in data">
-						<td v-for="match in stat" v-bind:bgcolor="match.color"><a @click="watchVideo(match)" v-bind:class="match.style" v-if="match.link" href="#">{{ match.text }}</a><span v-bind:class="match.style" v-bind:bgcolor="match.color" v-else>{{ match.text }}</span></td>
+						<td v-for="match in stat" v-bind:bgcolor="match.color" v-bind:class="match.styleTd"><a @click="watchVideo(match)" v-bind:class="match.style" v-if="match.link" href="#">{{ match.text }}</a><span v-bind:class="match.style" v-bind:bgcolor="match.color" v-else>{{ match.text }}</span></td>
 					</tr>
 				</table>
 			</div>

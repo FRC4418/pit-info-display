@@ -225,6 +225,15 @@ div.page {
 				.text-black {
 					color: black;
 				}
+				.highlight {
+					background-color: #fff2b7;
+				}
+				&.red {
+					background-color: #d32f2f;
+				}
+				&.blue {
+					background-color: #3f51b5;
+				}
 			}
 		}
 	}

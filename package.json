@@ -1,6 +1,6 @@
 {
   "name": "pit-info-display",
-  "version": "2.0.0",
+  "version": "2.1.2",
   "description": "NEW pit info display for team 4418 (feel free to copy and re-use)",
   "main": "index.js",
   "scripts": {

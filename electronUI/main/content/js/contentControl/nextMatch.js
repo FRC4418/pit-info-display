@@ -7,6 +7,7 @@ var nextMatch = new Vue({
 		time: "LOADING...",      //match.time           <--Scheduled time
 		timeUntil: "LOADING...", //match.actual_time    <--The actual time the match occurred. Not preemptively available.
 					   			 //match.predicted_time <--The time predicted by TBA
+		matchNumber: "?",
 		lineup: [
 			[{ //Red   Alliance
 				number: 0,
@@ -88,6 +89,7 @@ var nextMatch = new Vue({
 				var hours = (nextMatchTimeTBA.getHours()%12==0) ? ("12") : (nextMatchTimeTBA.getHours()%12);
 				var minutes = (nextMatchTimeTBA.getMinutes()<10) ? (`0${nextMatchTimeTBA.getMinutes()}`) : (nextMatchTimeTBA.getMinutes());
 				nextMatch.time = `${hours}:${minutes} ${(nextMatchTimeTBA.getHours>=12) ? ("PM") : ("AM")}`
+				nextMatch.matchNumber = `${match.comp_level}${match.match_number}`.toUpperCase();
 				//Populate alliances
 				//red alliance
 				nextMatch.lineup[0] = match.alliances.red.team_keys.map(function(teamKey) {
@@ -124,6 +126,7 @@ var nextMatch = new Vue({
 		if(difference<=0) {
 			if(shouldContact) {
 				debug("running");
+				nextMatch.timeUntil = "IN PROGRESS..."
 				shouldContact = false;
 				populateNextMatch().then(function() {
 					shouldContact = true;
