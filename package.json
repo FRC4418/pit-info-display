@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "buildWin": "electron-builder -w",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "electron ./",
     "postinstall": "electron build-tools/complete.js"
   },
   "build": {
     "appId": "com.sploders101.frcScedule",
     "productName": "FRC Pit Schedule & Scouting Dashboard",
     "asar": false,
+    "npmRebuild": false,
     "directories": {
       "output": "build"
     },
@@ -37,10 +38,7 @@
     "url": "https://github.com/FRC4418/pit-info-display/issues"
   },
   "homepage": "https://github.com/FRC4418/pit-info-display#readme",
-  "devDependencies": {
-    "electron-builder": "^20.6.2",
-    "electron": "^1.7.11"
-  },
+  "devDependencies": {},
   "dependencies": {
     "debug": "^3.1.0",
     "node-abi": "^2.2.0",
