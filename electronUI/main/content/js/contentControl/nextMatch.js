@@ -151,5 +151,6 @@ var nextMatch = new Vue({
 
 	}
 	populateNextMatch();
+	setInterval(populateNextMatch,30*1000); //Check again every 30 seconds
 	//updateMatchTime(); //Start executing (called after getting next match time to avoid console error spamming)
 })();
