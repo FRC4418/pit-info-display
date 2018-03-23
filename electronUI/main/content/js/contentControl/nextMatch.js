@@ -53,10 +53,10 @@ var nextMatch = new Vue({
 	timeCard.addEventListener("mouseup",function() {
 		withSeconds = false;
 	});
-	timeCard.addEventListener("touchdown",function() {
+	timeCard.addEventListener("touchstart",function() {
 		withSeconds = true;
 	});
-	timeCard.addEventListener("touchup",function() {
+	timeCard.addEventListener("touchend",function() {
 		withSeconds = false;
 	});
 
