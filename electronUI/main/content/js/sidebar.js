@@ -12,8 +12,11 @@ document.querySelector(".sidebar").addEventListener("click",function(e) {
 		var newActive = document.querySelector(`#${e.target.getAttribute("for")}`);
 		newActive.classList.remove("hidden");
 		newActive.classList.add("active");
-		window.resizeBy(-1,-1);
-		window.resizeBy(1,1);
+		var webviews = document.querySelectorAll(".page.active webview");
+		for (let i = 0; i < webviews.length; i++) {
+			webviews[i].style.height = "99%";
+			setTimeout(() => {webviews[i].style.height = "100%";},100);
+		}
 	}
 
 })
