@@ -88,7 +88,7 @@ var nextMatch = new Vue({
 				nextMatchTimeTBA = new Date(match.predicted_time*1000);
 				var hours = (nextMatchTimeTBA.getHours()%12==0) ? ("12") : (nextMatchTimeTBA.getHours()%12);
 				var minutes = (nextMatchTimeTBA.getMinutes()<10) ? (`0${nextMatchTimeTBA.getMinutes()}`) : (nextMatchTimeTBA.getMinutes());
-				nextMatch.time = `${hours}:${minutes} ${(nextMatchTimeTBA.getHours>=12) ? ("PM") : ("AM")}`
+				nextMatch.time = `${hours}:${minutes} ${(nextMatchTimeTBA.getHours()>=12) ? ("PM") : ("AM")}`
 				nextMatch.matchNumber = `${match.comp_level}${match.match_number}`.toUpperCase();
 				//Populate alliances
 				//red alliance
