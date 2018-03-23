@@ -1,6 +1,6 @@
 {
   "name": "pit-info-display",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "NEW pit info display for team 4418 (feel free to copy and re-use)",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
       "output": "build"
     },
     "win": {
-      "target": "portable"
+      "target": "nsis"
     },
     "mac": {
       "target": "dmg"
@@ -38,7 +38,10 @@
     "url": "https://github.com/FRC4418/pit-info-display/issues"
   },
   "homepage": "https://github.com/FRC4418/pit-info-display#readme",
-  "devDependencies": {},
+  "devDependencies": {
+  "electron": "^1.8.4",
+    "electron-builder": "^20.6.2"
+  },
   "dependencies": {
     "debug": "^3.1.0",
     "node-abi": "^2.2.0",
