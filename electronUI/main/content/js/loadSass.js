@@ -7,7 +7,7 @@
 		(function() {
 			var sass = require("node-sass");
 			sass.render({
-				file: `${process.cwd()}/electronUI/main/content/sass/main.scss`,
+				file: `${__dirname}/sass/main.scss`,
 				importer: function(url,prev,done) {
 					if(url=="js://vars") {
 						return {contents: `
@@ -28,7 +28,7 @@
 							$secondary-dark-text: ${cfg.teamInfo.colors["secondary-dark-text"]};
 						`};
 					} else {
-						return {file: path.join(`${process.cwd()}/electronUI/main/content/sass/`,url)};
+						return {file: path.join(`${__dirname}/sass/`,url)};
 					}
 				}
 			},function(err,res) {
