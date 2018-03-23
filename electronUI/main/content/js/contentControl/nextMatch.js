@@ -37,9 +37,9 @@ var nextMatch = new Vue({
 			}
 		}*/
 	},
-	/*methods: {
-		viewStats:
-	}*/
+	methods: {
+		setStats: (data) => console.log("Not ready yet!",data)
+	}
 });
 
 //Current Time

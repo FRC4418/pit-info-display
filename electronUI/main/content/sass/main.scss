@@ -20,7 +20,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Roboto';
+	//font-family: 'Roboto';
 	user-select: none;
 	cursor: default;
 }
@@ -33,6 +33,7 @@ html {
 		width: 100%;
 		min-height: 100%;
 		@include flex(row nowrap);
+		font-family: 'Roboto';
 	}
 }
 
@@ -215,6 +216,15 @@ div.page {
 				padding: 1em;
 				border: 1px solid black;
 				margin: 0;
+				font-size: 1.5em;
+				font-family: 'Roboto Mono' !important;
+
+				.bold {
+					font-weight: bold;
+				}
+				.text-black {
+					color: black;
+				}
 			}
 		}
 	}
