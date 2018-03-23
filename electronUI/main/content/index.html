@@ -1,20 +1,81 @@
 <html>
 	<head>
-		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:100,300,400,500,700" rel="stylesheet">
 		<!--<link rel="stylesheet" href="sass/main.css">-->
 		<script src="js/main.js"></script>
 	</head>
 	<body>
 		<div class="sidebar">
-			<div class="item active" for="Home">Home</div>
-			<div class="item" for="NextMatch">Next Match</div>
+			<div id="NMButton" class="item active" for="NextMatch">Next Match</div>
+			<div id="TSButton" class="item" for="TeamStats">Stats</div>
+			<div id="BButton" class="item" for="Browser">Browser</div>
+			<div id="LSButton" class="item" for="LiveStream">Live Stream</div>
 		</div>
 		<div class="content">
-			<div class="page active" id="Home">
-				Testing. This is page content.
+			<!--NOTE: END HOMEPAGE-->
+			<div class="page active" id="NextMatch">
+				<div class="bg"></div>
+				<div class="top">
+					<div class="time">
+						<div class="data">
+							<div>{{ currentTime }}</div>
+							<div>{{ ampm }}</div>
+						</div>
+						<div class="label">Current Time</div>
+					</div>
+					<div class="matchTime"> <!--Top Right Match Times Blocks-->
+						<div class="times">
+							<div class="timeLabel">
+								Time remaining
+							</div>
+							<div class="countdown">
+								{{ timeUntil }}
+							</div>
+							<div class="timeLabel">
+								Match Time
+							</div>
+							<div class="estimatedTime">
+								{{ time }}
+							</div>
+						</div>
+						<div class="label">
+							Our Next Match
+						</div>
+					</div>
+				</div>
+				<div class="bottom">
+					<div class="lineup">
+						<div class="red">
+							<div class="team" v-for="team in lineup[0]" @click="setStats(team.number,true)">
+								<div class="number">{{ team.number }}</div>
+								<div class="name">{{ team.name }}</div>
+								<div class="rank">{{ team.rank }}</div>
+							</div>
+						</div>
+						<div class="blue">
+							<div class="team" v-for="team in lineup[1]" @click="setStats(team.number,true)">
+								<div class="number">{{ team.number }}</div>
+								<div class="name">{{ team.name }}</div>
+								<div class="rank">{{ team.rank }}</div>
+							</div>
+						</div>
+					</div>
+					<div class="logo"></div>
+				</div>
 			</div>
-			<div class="page" id="NextMatch">
-				Hello World
+			<!--NOTE: END Next Match Stats-->
+			<div class="page hidden" id="TeamStats">
+				<table class="stats">
+					<tr v-for="stat in data">
+						<td v-for="match in stat" v-bind:bgcolor="match.color"><a @click="watchVideo(match)" v-bind:class="match.style" v-if="match.link" href="#">{{ match.text }}</a><span v-bind:class="match.style" v-bind:bgcolor="match.color" v-else>{{ match.text }}</span></td>
+					</tr>
+				</table>
+			</div>
+			<div class="page hidden" id="LiveStream">
+				<webview id="LiveStreamView"></webview>
+			</div>
+			<div class="page hidden" id="Browser">
+				<webview id="BrowserView" src="http://google.com"></webview>
 			</div>
 		</div>
 	</body>

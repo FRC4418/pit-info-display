@@ -1,33 +1,39 @@
-//Colors http://material.io/color/
-$primary-base: #2962ff;
-$primary-base-text: white;
-$primary-light: #768fff;
-$primary-light-text: black;
-$primary-dark: #0039cb;
-$primary-dark-text: white;
+@import "js://vars";
+// ---BEGIN MIXIN DECLARATION--- //
+@mixin card {
+	border-radius: 10px;
+	background-color: $secondary-base;
+	color: $secondary-base-text;
+	padding: 1em;
+	margin: 0.5em;
+	box-shadow: 0px 0px 20px black;
+}
+@mixin flex($flow) {
+	display: flex;
+	flex-flow: $flow;
+}
 
-$secondary-base: #fdd835;
-$secondary-base-text: black;
-$secondary-light: #ffff6b;
-$secondary-light-text: black;
-$secondary-dark: #c6a700;
-$secondary-dark-text: black;
+// ---END MIXIN DECLARATION--- //
 
 //Start normal styling
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	//font-family: 'Roboto';
+	user-select: none;
+	cursor: default;
 }
 
 html {
 	width: 100%;
-	min-height: 100%;
+	height: 100%;
+	overflow: auto;
 	body {
 		width: 100%;
 		min-height: 100%;
-		display: flex;
-		flex-flow: row nowrap;
+		@include flex(row nowrap);
+		font-family: 'Roboto';
 	}
 }
 
@@ -36,12 +42,11 @@ div.sidebar {
 	height: 100%;
 	background-color: $primary-base;
 	color: $primary-base-text;
-	display: flex;
-	flex-flow: column nowrap;
+	@include flex(column nowrap);
 	user-select: none;
 	cursor: default;
 	div.item {
-		display: flex;
+		@include flex(row nowrap);
 		//justify-content: center;
 		text-indent: 1em;
 		align-items: center;
@@ -51,7 +56,7 @@ div.sidebar {
 		font-family: 'Roboto';
 		font-weight: 500;
 		font-size: 2em;
-		&:hover {
+		&:hover,&.active {
 			background-color: $primary-dark;
 			color: $primary-dark-text;
 		}
@@ -61,10 +66,8 @@ div.sidebar {
 div.content {
 	width: 100%;
 	div.page {
-		//Do not show inactive pages
-		display: none;
-		&.active { //But show active ones
-			display: flex;
+		&.hidden { //Do not show hidden pages
+			display: none !important;
 		}
 		//Continue with general styling
 		//background-color: $secondary-light;
@@ -77,11 +80,172 @@ div.content {
 //Style individual pages
 div.page {
 	&#Home {
-		//background-color: $secondary-dark;
-		//color: $secondary-dark-text;
-		.branding {
-			background-color: $secondary-dark;
-			color: $secondary-dark-text;
+		padding: 0;
+		webview {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&#NextMatch {
+		padding: 0;
+		@include flex(column nowrap);
+		.bg {
+			background-color: $primary-dark;
+			width: 100%;
+			height: 100%;
+			-webkit-mask: url(img/Hexagon_Tiling.svg) 0 0/70px;
+			position: absolute;
+			left: 0;
+			z-index: -1;
+		}
+		div.top, div.bottom {
+			@include flex(row nowrap);
+			padding: 1em;
+		}
+		div.top {
+			flex-grow: 0.25;
+			div.time {
+				@include flex(column nowrap);
+				@include card;
+				flex-grow: 0.15;
+				div.label {
+					@include flex(row nowrap);
+					justify-content: center;
+					//align-items: center;
+					border-top: 1px solid black;
+					padding-top: 1em;
+					font-size: 2vh;
+					font-weight: 800;
+				}
+				div.data {
+					@include flex(column nowrap);
+					flex-grow: 1;
+					justify-content: center;
+					align-items: center;
+					div {
+						font-size: 7vw;
+						font-weight: 100;
+					}
+				}
+			}
+			div.matchTime {
+				@include card;
+				flex-grow: 1;
+				@include flex(column nowrap);
+				div.times {
+					@include flex(column nowrap);
+					justify-content: center;
+					align-items: center;
+					font-size: 7vw;
+					font-weight: 100;
+					flex-grow: 1;
+					div.timeLabel {
+						align-self: flex-start;
+						border-right: 2px solid;
+						border-bottom: 2px solid;
+						font-size: 2vw;
+						font-weight: 300;
+						padding: 5px;
+						border-bottom-right-radius: 6px;
+					}
+				}
+				div.label {
+					border-top: 1px solid black;
+					@include flex(row nowrap);
+					justify-content: center;
+					font-size: 2vh;
+					font-weight: 800;
+					padding-top: 1em;
+				}
+			}
+		}
+		div.bottom {
+			flex-grow: 1;
+			div.lineup {
+				@include card;
+				padding: 0;
+				flex-grow: 1;
+				@include flex(row nowrap);
+				overflow: hidden;
+				& > div {
+					flex-grow: 1;
+				}
+				div.red,div.blue {
+					@include flex(column nowrap);
+					justify-content: space-around;
+					flex-grow: 1;
+					div.team {
+						flex-grow: 1;
+						@include flex(row nowrap);
+						justify-content: space-between;
+						align-items: center;
+						font-size: 2em;
+					}
+				}
+				div.red {
+					padding: 1em;
+					background-color: #d32f2f;
+					border-right: 3px solid;
+				}
+				div.blue {
+					padding: 1em;
+					background-color: #3f51b5;
+				}
+			}
+			div.logo {
+				@include card;
+				//background-color: $primary-base;
+				background-image: $team-logo;
+				background-size: contain;
+				background-position: center center;
+				background-repeat: no-repeat;
+				flex-grow: 0.625;
+			}
+		}
+	}
+	&#TeamStats {
+		padding: 0;
+		table.stats {
+			border: 1px solid black;
+			//Enable borders
+			border-collapse: collapse;
+			td,th {
+				padding: 1em;
+				border: 1px solid black;
+				margin: 0;
+				font-size: 1.5em;
+				font-family: 'Roboto Mono' !important;
+
+				.bold {
+					font-weight: bold;
+				}
+				.text-black {
+					color: black;
+				}
+			}
+		}
+	}
+	&#Browser {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		webview {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	&#LiveStream {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		webview {
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			margin: 0;
 		}
 	}
 }

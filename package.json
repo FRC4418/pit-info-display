@@ -1,11 +1,27 @@
 {
   "name": "pit-info-display",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "NEW pit info display for team 4418 (feel free to copy and re-use)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "rebuild-node-sass": "electron build-tools/complete.js"
+    "buildWin": "electron-builder -w",
+    "test": "electron ./",
+    "postinstall": "electron build-tools/complete.js"
+  },
+  "build": {
+    "appId": "com.sploders101.frcScedule",
+    "productName": "FRC Pit Schedule & Scouting Dashboard",
+    "asar": false,
+    "npmRebuild": false,
+    "directories": {
+      "output": "build"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    }
   },
   "repository": {
     "type": "git",
@@ -22,10 +38,14 @@
     "url": "https://github.com/FRC4418/pit-info-display/issues"
   },
   "homepage": "https://github.com/FRC4418/pit-info-display#readme",
+  "devDependencies": {
+  "electron": "^1.8.4",
+    "electron-builder": "^20.6.2"
+  },
   "dependencies": {
-    "electron": "^1.7.11",
+    "debug": "^3.1.0",
     "node-abi": "^2.2.0",
     "node-sass": "^4.7.2",
-    "thebluealliance": "^1.2.3"
+    "tbav3": "^1.1.0"
   }
 }

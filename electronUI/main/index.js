@@ -6,7 +6,7 @@ var windowName = path.basename(__dirname);
 module.exports = function() {
 	windows.set(windowName,new BrowserWindow({
 		fullscreen: false,
-		show: false
+		show: true //false
 	}));
 	windows.get(windowName).loadURL(`file://${__dirname}/content/index.html`);
 	ipcMain.on("status",function(e,arg) {

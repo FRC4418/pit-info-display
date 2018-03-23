@@ -6,12 +6,12 @@
 * semantics, and therefore needs access to the electron environment so that it
 * knows how to do stuff so that it can work. It is NOT however, interactive, and
 * therefore simply logs to the console.
-* 
+*
 */
 //var electron = require("electron");
 var fs = require("fs");
 var abi = require("node-abi");
-var spawn = require("child_process").spawn;
+var exec = require("child_process").exec;
 
 //Get some information about your environment
 var arch = process.arch;
@@ -21,8 +21,13 @@ var vendor = `vendor/${platform}-${arch}-${abi.getAbi(electronVersion,"electron"
 
 //Change directory to node-sass module folder
 process.chdir(`${__dirname}/../node_modules/node-sass`);
+
+//Check if we even need to build
+if(fs.existsSync(vendor+"/binding.node")) process.exit();
+
 //Rebuild node-sass with node-gyp
-var gyp = spawn("node-gyp",["rebuild",`--target=${electronVersion}`,`--arch=${arch}`,"--dist-url=https://atom.io/download/electron"],{cwd: process.cwd()});
+console.log(process.cwd());
+var gyp = exec(`node-gyp rebuild --target=${electronVersion} --arch=${arch} --dist-url=https://atom.io/download/electron`,{cwd: process.cwd()});
 //Attach node-gyp to console so you don't have a heart attack when your computer's
 //fans sound like a jet engine
 gyp.stdout.on("data",function(data) {
