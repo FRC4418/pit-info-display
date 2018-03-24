@@ -42,7 +42,6 @@ function setStats(team,switchPage,indicator,code) {
 			}
 		]
 	], //2-dimensional array indexed data[y][x]
-	console.log(statsPage.data);
 	//Get matches for default team
 	tba.getMatchesForTeam(team,(code) ? (code) : (cfg.competitionInfo.code)).then((data) => {
 

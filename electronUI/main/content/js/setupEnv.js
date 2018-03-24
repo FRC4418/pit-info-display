@@ -6,19 +6,23 @@ var tba = remote.getGlobal("tba");
 
 class Team {
 	constructor(teamNumber,enabled) {
+		let self = this;
+		this.promise = new Promise((resolve) => {
+			tba.getTeam(teamNumber).then((team) => { // Get team data
+				//console.log("GetTeam");
+				self.number = teamNumber;
+				self.name = team.nickname;
+				tba.getTeamAtEvent(teamNumber,cfg.competitionInfo.code).then(function(teamMeta) {
+					//console.log("AtEvent");
+					self.rank = (!teamMeta) ? ("?") : ((!!teamMeta.Error) ? ("Err") : (teamMeta.qual.ranking.rank));
+					// console.log(self,this);
+					resolve(self);
+				});
+			});
+		});
 		this.number = 0;
 		this.name = "LOADING...";
 		this.rank = 0;
-		let self = this;
-		tba.getTeam(teamNumber).then((team) => {//Get team data
-			//console.log("GetTeam");
-			self.number = teamNumber;
-			self.name = team.nickname;
-			tba.getTeamAtEvent(teamNumber,cfg.competitionInfo.code).then(function(teamMeta) {
-				//console.log("AtEvent");
-				self.rank = (!teamMeta) ? ("?") : ((!!teamMeta.Error) ? ("Err") : (teamMeta.qual.ranking.rank));
-			});
-		});
 	}
 }
 

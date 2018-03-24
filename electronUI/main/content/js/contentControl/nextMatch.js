@@ -9,16 +9,20 @@ var nextMatch = new Vue({
 					   			 //match.predicted_time <--The time predicted by TBA
 		matchNumber: "?",
 		lineup: [
-			[{ //Red   Alliance
-				number: 0,
-				name: "Fetching team list...",
-				rank: 0
-			}],
-			[{ //Blue  Alliance
-				number: 0,
-				name: "Fetching team list...",
-				rank: 0
-			}]
+			[
+				{ //Red   Alliance
+					number: 0,
+					name: "Fetching team list...",
+					rank: 0
+				}
+			],
+			[
+				{ //Blue  Alliance
+					number: 0,
+					name: "Fetching team list...",
+					rank: 0
+				}
+			]
 		]
 		/*teamStats: {
 			number: 0,     //team.team_number
@@ -76,14 +80,20 @@ var nextMatch = new Vue({
 	updateCurrentTime();
 })();
 
+// let populateMatch;
+
 (function() {
 	//Populate data for our next match
 	var nextMatchTBA;
 	var nextMatchTimeTBA;
-	function populateNextMatch() {
+	function populateNextMatch(newMatch) {
 		return new Promise(function(resolve) {
-			tba.getNextMatch(cfg.teamInfo.number,cfg.competitionInfo.code).then(function(match) {
-				debug(match);
+			tba.getNextMatch(cfg.teamInfo.number,cfg.competitionInfo.code).then(function(match,matchAfterThat) {
+				var currentTime = new Date();
+				var difference = (match.predicted_time*1000)-currentTime.getTime();
+				if(difference<=0) {
+					match = matchAfterThat;
+				}
 				nextMatchTBA = match;
 				nextMatchTimeTBA = new Date(match.predicted_time*1000);
 				var hours = (nextMatchTimeTBA.getHours()%12==0) ? ("12") : (nextMatchTimeTBA.getHours()%12);
@@ -91,14 +101,19 @@ var nextMatch = new Vue({
 				nextMatch.time = `${hours}:${minutes} ${(nextMatchTimeTBA.getHours()>=12) ? ("PM") : ("AM")}`
 				nextMatch.matchNumber = `${match.comp_level}${match.match_number}`.toUpperCase();
 				//Populate alliances
-				//red alliance
-				nextMatch.lineup[0] = match.alliances.red.team_keys.map(function(teamKey) {
-					return new Team(Number(teamKey.replace("frc","")));
-				});
+				for (let i = 0; i < match.alliances.red.team_keys.length; i++) {
+					let tempTeam = new Team(match.alliances.red.team_keys[i].replace("frc","")).promise.then((data) => {
+						nextMatch.lineup[0][i] = data;
+					});
+					if(newMatch) nextMatch.lineup[0][i] = tempTeam;
+				}
 				//Blue alliance
-				nextMatch.lineup[1] = match.alliances.blue.team_keys.map(function(teamKey) {
-					return new Team(Number(teamKey.replace("frc","")));
-				});
+				for (let i = 0; i < match.alliances.blue.team_keys.length; i++) {
+					let tempTeam = new Team(match.alliances.blue.team_keys[i].replace("frc","")).promise.then((data) => {
+						nextMatch.lineup[1][i] = data;
+					});
+					if(newMatch) nextMatch.lineup[1][i] = tempTeam;
+				}
 				requestAnimationFrame(updateMatchTime);
 				resolve();
 			}).catch(function(err) {
@@ -128,7 +143,7 @@ var nextMatch = new Vue({
 				debug("running");
 				nextMatch.timeUntil = "IN PROGRESS..."
 				shouldContact = false;
-				populateNextMatch().then(function() {
+				populateNextMatch(true).then(function() {
 					shouldContact = true;
 				});
 			}
