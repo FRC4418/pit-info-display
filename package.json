@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "buildWin": "electron-builder -w",
+	"buildLinux": "electron-builder --linux",
     "test": "electron ./",
     "postinstall": "electron build-tools/complete.js"
   },
@@ -16,6 +17,9 @@
     "directories": {
       "output": "build"
     },
+	"linux": {
+		"target": "deb"
+	},
     "win": {
       "target": "nsis"
     },
@@ -32,7 +36,10 @@
     "4418",
     "robotics"
   ],
-  "author": "Shaun Keys",
+  "author": {
+	  "email": "mariobuddy@gmail.com",
+	  "name": "Shaun Keys"
+	},
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/FRC4418/pit-info-display/issues"
